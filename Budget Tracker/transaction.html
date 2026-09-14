@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Transactions</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="Scripts/transactions.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+  </head>
+  <body>
+
+    <div id="Transactions-Main-Container">
+      <div id="TPage_Section1">
+
+
+        <div id="Section1_Header">
+
+          <div id="NameContainer">
+            <h3 id="name">Welcome </h3>
+          </div>
+
+          <div id="totals">
+            <p id="tIncome">Income: €</p>
+            <p id="tExpense">Expense: €</p>
+            <p id="tRemain">Remaining Balance: € </p>
+          </div>
+        </div>
+
+
+        <div id="EnterData_Main_Container">
+          <div id="TypeContainer">
+            <label>Type:</label>
+            <select id="type">
+              <option value="-1" selected disabled>Choose one...</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+
+            </select>
+          </div>
+
+          <div id="data">
+            <form id="InputDataForm">
+
+              <label>Enter Date: </label>
+              <input type="date" id="InputDate"><br>
+
+              <label>Enter Name:</label>
+              <input type="text" id="InputName"><br>
+
+              <label>Enter Amount:</label>
+              <input type="text" id="InputAmount"><br>
+
+
+
+            </form>
+          </div>
+        </div>
+
+        <div id="fuctions">
+          <div id="FilterDiv">
+            <h4>Fiter By:</h4><br>
+            <label>None:</label>
+            <input type="radio" value="none" name="filter">
+            <label>Income:</label>
+            <input type="radio" value="income" name="filter">
+            <label>Expense:</label>
+            <input type="radio" value="expense" name="filter">
+          </div>
+
+          <div id="TransactionDiv">
+            <input type="button" id="AddTransactionBtt"  value="Add Transaction">
+          </div>
+
+          <div id="ClearDiv">
+            <input type="button" id="ClearAllBtt" value="Clear All">
+            <input type="button" id="graphBt" value="Graph">
+          </div>
+        </div>
+
+      </div>
+
+      <div id="TPage_Section2">
+        <table id="TableDisplay">
+          <thead>
+          <tr id="labels">
+            <th>Type</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+
+        <tbody id ="TableDisplayBody">
+
+        </tbody>
+      
+
+
+  </table>
+       
+      </div>
+    </div>
+    
+
+  </body>
+</html>

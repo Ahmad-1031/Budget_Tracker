@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart.js from Local Storage</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { max-width: 600px;max-height:400px }
+    </style>
+</head>
+<body>
+
+<h2>Chart from Local Storage</h2>
+<canvas id="myChart"></canvas>
+
+<script>
+
+
+    // --- Step 1: Save sample data to localStorage if not already present ---
+
+        
+        
+        
+        let income = 0;
+        let expense = 0;
+        let TransactionArray;
+
+        if(localStorage){
+
+            TransactionArray = localStorage.getItem("TArray") ?
+            JSON.parse(localStorage.getItem("TArray")) : [];
+
+        }
+
+        TransactionArray.forEach( t =>{
+            if(t.type ==="income"){
+                income++;
+            }else{
+                expense++;
+            }
+        })
+
+       
+        const sampleData = {
+            labels: ["Income", "Expense"],
+            values: [income, expense]
+        };
+        localStorage.setItem("chartData", JSON.stringify(sampleData));
+        
+
+        
+    
+
+    // --- Step 2: Load and validate data from localStorage ---
+    let chartData;
+    try {
+        const stored = localStorage.getItem("chartData");
+        chartData = JSON.parse(stored);
+
+        // Validate structure
+        if (!chartData || !Array.isArray(chartData.labels) || !Array.isArray(chartData.values)) {
+            throw new Error("Invalid chart data format");
+        }
+    } catch (err) {
+        console.error("Error loading chart data:", err);
+        chartData = { labels: ["none","none","none"], values: [1,1,1] }; // fallback
+    }
+const barColors = ["red", "green","blue","orange","brown","pink"];
+    // --- Step 3: Create Chart.js chart ---
+    const ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
+        type: "pie", // Change to 'line', 'pie', etc. if needed
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: "Sample Data",
+                data: chartData.values,
+                backgroundColor: barColors,
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
